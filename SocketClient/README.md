@@ -49,6 +49,46 @@ npm start
 }
 ```
 
+Resolved case
+
+```json
+{
+    "match_id": 6916,
+    "game_time": 2200,
+    "radiant": {
+        "team_id": 123,
+        "name": "BR"
+    },
+    "dire": {
+        "team_id": 122,
+        "name": "US"
+    },
+    "markets": {
+        "radiant_team_win": {
+            "result": {
+                "outcome": 0,
+                "game_time": 2200
+            },
+            "prediction": {
+                "outcome": 0,
+                "game_time": 2198,
+                "prediction": [
+                    0.96,
+                    0.04
+                ]
+            },
+            "state": {
+                "status": "Resolved",
+                "game_time": 2200,
+                "reason": {
+                    "message": "Market resolved successfully"
+                }
+            }
+        }
+    }
+}
+```
+
 ## Market status
 
 Market status can have following values: "Open", "OnHold", "WaitingForResult", "Resolved"
