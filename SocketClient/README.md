@@ -18,6 +18,12 @@ npm start
 {
     "match_id": 6916,
     "game_time": 1415,
+    "series": {
+        "series_id": 6235,
+        "game_number": 1,
+        "dire_wins": 0,
+        "radiant_wins": 0
+    },
     "radiant": {
         "team_id": 123,
         "name": "BR"
@@ -55,6 +61,12 @@ Resolved case
 {
     "match_id": 6916,
     "game_time": 2200,
+        "series": {
+        "series_id": 6235,
+        "game_number": 1,
+        "dire_wins": 0,
+        "radiant_wins": 0
+    },
     "radiant": {
         "team_id": 123,
         "name": "BR"
