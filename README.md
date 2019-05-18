@@ -1,37 +1,105 @@
-## Welcome to GitHub Pages
+# Example payload
 
-You can use the [editor on GitHub](https://github.com/fortune-teller-io/samples/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+## Event: match
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```json
+{
+    "match_id": 6916,
+    "game_time": 1415,
+    "series": {
+        "series_id": 6235,
+        "game_number": 1,
+        "dire_wins": 0,
+        "radiant_wins": 0
+    },
+    "radiant": {
+        "team_id": 123,
+        "name": "BR"
+    },
+    "dire": {
+        "team_id": 122,
+        "name": "US"
+    },
+    "markets": {
+        "radiant_team_win": {
+            "result": null,
+            "prediction": {
+                "outcome": 0,
+                "game_time": 1415,
+                "prediction": [
+                    0.83,
+                    0.17
+                ]
+            },
+            "state": {
+                "status": "OnHold",
+                "game_time": 1415,
+                "reason": {
+                    "message": "Probability is higher than 0.80"
+                }
+            }
+        }
+    }
+}
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+Resolved case
 
-### Jekyll Themes
+```json
+{
+    "match_id": 6916,
+    "game_time": 2200,
+        "series": {
+        "series_id": 6235,
+        "game_number": 1,
+        "dire_wins": 0,
+        "radiant_wins": 0
+    },
+    "radiant": {
+        "team_id": 123,
+        "name": "BR"
+    },
+    "dire": {
+        "team_id": 122,
+        "name": "US"
+    },
+    "markets": {
+        "radiant_team_win": {
+            "result": {
+                "outcome": 0,
+                "game_time": 2200
+            },
+            "prediction": {
+                "outcome": 0,
+                "game_time": 2198,
+                "prediction": [
+                    0.96,
+                    0.04
+                ]
+            },
+            "state": {
+                "status": "Resolved",
+                "game_time": 2200,
+                "reason": {
+                    "message": "Market resolved successfully"
+                }
+            }
+        }
+    }
+}
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/fortune-teller-io/samples/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+## Market status
 
-### Support or Contact
+Market status can have following values: "Open", "OnHold", "WaitingForResult", "Resolved"
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+Typescript definition:
+
+```typescript
+enum MarketStatus {
+    Open,
+    OnHold,
+    WaitingForResult,
+    Resolved
+}
+```
