@@ -10,6 +10,21 @@ npm i
 npm start
 ```
 
+# Environment
+## Staging
+
+[Application](https://staging.fortune-teller.io)
+
+[OAuth Discovery](https://staging.fortune-teller.io:5000/.well-known/openid-configuration)
+
+
+## Prod
+
+[Application](https://app.fortune-teller.io)
+
+[OAuth Discovery](https://app.fortune-teller.io:5000/.well-known/openid-configuration)
+
+
 # Example payload
 
 ## Event: match
