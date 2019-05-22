@@ -30,7 +30,11 @@ request(options, function (error, response, body) {
         console.log('Connected');
     })
     socket.on('match', (data) => {
-        console.log(JSON.stringify(data));
+        var direWinProbability = data.markets.radiant_team_win.prediction.prediction[0];
+        var radiantWinProbability = data.markets.radiant_team_win.prediction.prediction[1];
+        var direOdds = 1 / direWinProbability - 0.15;
+        var radiantOdds = 1 / radiantWinProbability - 0.15;
+        console.log(`${direOdds} (radiant): ${radiantOdds} (dire)`);
     });
     socket.on('disconnect', () => {
         console.log('Disconnected');
