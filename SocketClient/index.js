@@ -39,8 +39,6 @@ request(options, function (error, response, body) {
     socket.on('disconnect', () => {
         console.log('Disconnected');
     });
-
-
 });
 
 require('readline')
