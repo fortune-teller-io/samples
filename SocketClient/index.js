@@ -3,13 +3,13 @@ var request = require("request");
 
 var client_id = "client_id";
 var client_secret = "client_secret";
-var address = "https://staging.fortune-teller.io/dota"
+var address = "https://app.fortune-teller.io/dota/v2"
 
 var options = {
     method: 'POST',
-    url: 'https://staging.fortune-teller.io:5000/connect/token',
+    url: 'https://auth.fortune-teller.io/connect/token',
     headers: { 'content-type': 'application/x-www-form-urlencoded' },
-    body: `grant_type=client_credentials&client_id=${client_id}&client_secret=${client_secret}&scope=dota`
+    body: `grant_type=client_credentials&client_id=${client_id}&client_secret=${client_secret}&scope=reactive`
 };
 
 request(options, function (error, response, body) {
@@ -18,6 +18,7 @@ request(options, function (error, response, body) {
 
     var parsed = JSON.parse(body);
     var access_token = parsed.access_token;
+
     var socket = client(address, {
         extraHeaders: {
             Authorization: access_token
@@ -30,19 +31,21 @@ request(options, function (error, response, body) {
         console.log('Connected');
     })
     socket.on('match', (data) => {
-        var direWinProbability = data.markets.radiant_team_win.prediction.prediction[0];
-        var radiantWinProbability = data.markets.radiant_team_win.prediction.prediction[1];
-        var direOdds = 1 / direWinProbability - 0.15;
-        var radiantOdds = 1 / radiantWinProbability - 0.15;
-        console.log(`${radiantOdds} (radiant): ${direOdds} (dire)`);
+        console.log(JSON.stringify(data));
     });
+    socket.on('reconnect', attempt => {
+        console.log(`Reconnect #${attempt}`);
+    })
     socket.on('disconnect', () => {
         console.log('Disconnected');
+    });
+    socket.on('error', (error) => {
+        console.log(error);
     });
 });
 
 require('readline')
     .createInterface(process.stdin, process.stdout)
-    .question("Press [Enter] to exit...", function () {
+    .question("Press [Enter] to exit... \n", function () {
         process.exit();
     });
